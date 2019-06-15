@@ -6,5 +6,9 @@ return [
         "database" => 'task',
         "username" => 'root',
         "password" => '',
+    ],
+    "admin"=>[
+        "name" => 'admin',
+        'password' => 123
     ]
 ];
