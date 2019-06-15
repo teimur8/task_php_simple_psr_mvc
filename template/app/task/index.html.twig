@@ -22,7 +22,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for item in items %}
+                {% for item in items.items %}
                     <tr>
                         <th scope="row">{{ item.id }}</th>
                         <td>{{ item.username }}</td>
@@ -31,8 +31,29 @@
                         <td>{{ item.is_done?'Yes':'No' }}</td>
                     </tr>
                 {% endfor %}
+
                 </tbody>
             </table>
+
+
+
+            {% if items.hasPages() %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% if items.onFirstPage() %}
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="{{ items.previousPageUrl() }}">Previous</a></li>
+                        {% endif %}
+
+                        {% if items.hasMorePages() %}
+                            <li class="page-item"><a class="page-link" href="{{ items.nextPageUrl }}">Next</a></li>
+                        {% else %}
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+
+
         </div>
     </div>
 
