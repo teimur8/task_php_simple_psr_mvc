@@ -1,0 +1,12 @@
+{
+    "name": "user1/mvc_simp_framework",
+    "authors": [
+        {
+            "name": "Tima",
+            "email": "gt720@yandex.ru"
+        }
+    ],
+    "require": {
+        "illuminate/container": "^5.8"
+    }
+}
