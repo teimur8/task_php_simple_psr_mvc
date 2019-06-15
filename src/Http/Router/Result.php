@@ -20,9 +20,9 @@ class Result
         return $this->name;
     }
 
-    public function getHandler(): Handler
+    public function getHandler()
     {
-        return new Handler($this->handler);
+        return $this->handler;
     }
 
     public function getAttributes(): array

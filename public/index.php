@@ -5,6 +5,7 @@ use Framework\Http\Router\AuraRouterAdapter;
 use Framework\Http\Router\Exception\RequestNotMatchedException;
 use Framework\Http\Router\RouteResolver;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\HttpHandlerRunner\Emitter\SapiEmitter;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -19,7 +20,16 @@ $router = $ioc->router;
 $resolver = $ioc->make(RouteResolver::class);
 
 // routes
-$routes->get('home', '/', [\App\Controller\TaskController::class, 'index']);
+$routes->get('tasks', '/', "\App\Controller\TaskController@index");
+$routes->post('tasks-store', '/', "\App\Controller\TaskController@store");
+
+$routes->get('admin', '/admin', "\App\Controller\AdminController@index");
+$routes->get('admin.edit', '/admin/{id}', "\App\Controller\AdminController@edit");
+$routes->post('admin.update', '/admin/{id}', "\App\Controller\AdminController@update");
+
+
+
+
 
 // run
 try{
@@ -30,6 +40,8 @@ try{
 }
 
 
+$emitter = new SapiEmitter();
+$emitter->emit($response);
 
 
 

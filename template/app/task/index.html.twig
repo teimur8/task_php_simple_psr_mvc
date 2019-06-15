@@ -1,0 +1,78 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Tasks</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col"><a href="{{ path('tasks') }}{{ "?username=desc" }}">Username</a></th>
+                    <th scope="col"><a href="{{ path('tasks') }}{{ "?email=desc" }}">Email</a></th>
+                    <th scope="col">Text</th>
+                    <th scope="col"><a href="{{ path('tasks') }}{{ "?is_done=desc" }}">Status</a></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.text }}</td>
+                        <td>{{ item.is_done?'Yes':'No' }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" action="{{  path('tasks-store') }}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="Email" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Text</label>
+                            <textarea class="form-control" name="text" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

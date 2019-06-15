@@ -8,7 +8,7 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\ServerRequest;
 
-class TaskController
+class AdminController
 {
     private $template;
     /**
@@ -26,15 +26,20 @@ class TaskController
     {
         $items = $this->services->get($request);
         
-        return new HtmlResponse($this->template->render('app/task/index', [
-            'items' => $items
-        ]));
+        return new HtmlResponse($this->template->render('app/admin/index', compact('items')));
     }
     
-    public function store(ServerRequest $request)
+    public function edit(ServerRequest $request, $id)
     {
-        $this->services->create($request);
+        $item = $this->services->show($id);
         
-        return new RedirectResponse('/');
+        return new HtmlResponse($this->template->render('app/admin/edit', compact('item')));
+    }
+    
+    public function update(ServerRequest $request, $id)
+    {
+        $this->services->update($request->getParsedBody(), $id);
+        
+        return new RedirectResponse("/admin");
     }
 }

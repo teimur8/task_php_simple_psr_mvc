@@ -1,0 +1,42 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Tasks edit</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col"><a href="{{ path('tasks') }}{{ "?username=desc" }}">Username</a></th>
+                    <th scope="col"><a href="{{ path('tasks') }}{{ "?email=desc" }}">Email</a></th>
+                    <th scope="col">Text</th>
+                    <th scope="col"><a href="{{ path('tasks') }}{{ "?is_done=desc" }}">Status</a></th>
+                    <th scope="col"><a href="{{ path('tasks') }}">Actions</a></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.text }}</td>
+                        <td>{{ item.is_done?'Yes':'No' }}</td>
+                        <td>
+                            <a href="{{ path('admin.edit', {'id': item.id}) }}">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

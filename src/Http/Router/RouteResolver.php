@@ -3,6 +3,7 @@
 namespace Framework\Http\Router;
 
 use Illuminate\Container\Container;
+use Zend\Diactoros\Response\HtmlResponse;
 
 class RouteResolver
 {
@@ -18,11 +19,13 @@ class RouteResolver
     public function handle(Result $result)
     {
         $handler = $result->getHandler();
-    
-        $controller = $this->ioc->make($handler->getClass());
-        $method = $handler->getMethod();
         
-        $response = call_user_func_array([$controller,$method], $result->getAttributes());
+        try {
+            $response = $this->ioc->call($handler, $result->getAttributes());
+        } catch (\Exception $e) {
+            $response = new HtmlResponse($e->getMessage(), 500);
+        }
         
+        return $response;
     }
 }
