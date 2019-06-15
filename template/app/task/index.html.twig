@@ -15,10 +15,19 @@
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col"><a href="{{ path('tasks') }}{{ "?username=desc" }}">Username</a></th>
-                    <th scope="col"><a href="{{ path('tasks') }}{{ "?email=desc" }}">Email</a></th>
+                    <th scope="col">Username
+                        <a href="{{ path('tasks', {}, {'username':'desc'}) }}">d</a>
+                        <a href="{{ path('tasks', {}, {'username':'asc'}) }}">a</a>
+                    </th>
+                    <th scope="col">Email
+                        <a href="{{ path('tasks', {}, {'email':'desc'}) }}">d</a>
+                        <a href="{{ path('tasks', {}, {'email':'asc'}) }}">a</a>
+                    </th>
                     <th scope="col">Text</th>
-                    <th scope="col"><a href="{{ path('tasks') }}{{ "?is_done=desc" }}">Status</a></th>
+                    <th scope="col">Status
+                        <a href="{{ path('tasks', {}, {'is_done':'desc'})  }}">d</a>
+                        <a href="{{ path('tasks', {}, {'is_done':'asc'})  }}">a</a>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>

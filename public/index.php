@@ -24,16 +24,12 @@ $routes->get('tasks', '/', "\App\Controller\TaskController@index");
 $routes->post('tasks-store', '/', "\App\Controller\TaskController@store");
 
 $routes->get('admin', '/admin', "\App\Controller\AdminController@index|auth");
-$routes->get('admin.edit', '/admin/{id}', "\App\Controller\AdminController@edit|auth");
+$routes->get('admin.edit', '/admin/edit/{id}', "\App\Controller\AdminController@edit|auth");
 $routes->post('admin.update', '/admin/{id}', "\App\Controller\AdminController@update|auth");
 
 $routes->get('login', '/login', "\App\Controller\LoginController@index");
 $routes->post('login.store', '/login', "\App\Controller\LoginController@store");
 $routes->get('logout', '/logout', "\App\Controller\LoginController@logout");
-
-
-
-
 
 
 

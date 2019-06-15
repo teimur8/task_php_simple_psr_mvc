@@ -25,7 +25,7 @@ class AdminController
     public function index(ServerRequest $request)
     {
         $items = $this->services->get($request);
-        
+       
         return new HtmlResponse($this->template->render('app/admin/index', compact('items')));
     }
     

@@ -15,10 +15,12 @@ class TaskServices
         $params = $request->getQueryParams();
         if (!empty($params)) {
             foreach ($params as $k => $v) {
-                if(!in_array($k, ['page']))
+                if(!in_array($k, ['page'])){
                     $q = $q->orderBy($k, $v);
+                }
             }
         }
+        
         
         // pagination
         $currentPage = $params['page'] ? $params['page']:1;

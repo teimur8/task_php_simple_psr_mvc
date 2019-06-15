@@ -5,14 +5,21 @@ namespace Framework\Http\Template\Twig\Extension;
 use Framework\Http\Router\Router;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Zend\Diactoros\ServerRequest;
 
 class RouteExtension extends AbstractExtension
 {
     private $router;
-
-    public function __construct(Router $router)
+    /**
+     * @var ServerRequest
+     */
+    private $request;
+    
+    public function __construct(Router $router, ServerRequest $request)
     {
         $this->router = $router;
+        $this->request = $request;
+//        dd($request);
     }
 
     public function getFunctions(): array
@@ -22,8 +29,16 @@ class RouteExtension extends AbstractExtension
         ];
     }
 
-    public function generatePath($name, array $params = []): string
+    public function generatePath($name, array $params = [], array $query = []): string
     {
-        return $this->router->generate($name, $params);
+        if(!empty($query)){
+            $path =  $this->router->generate($name, $params);
+            return $path . '?' . http_build_query(array_merge($this->request->getQueryParams(), $query));
+        }else{
+            return $this->router->generate($name, $params);
+        }
     }
+    
+    
+    
 }

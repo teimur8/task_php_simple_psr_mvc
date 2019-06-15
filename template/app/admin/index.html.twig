@@ -15,10 +15,19 @@
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col"><a href="{{ path('tasks') }}{{ "?username=desc" }}">Username</a></th>
-                    <th scope="col"><a href="{{ path('tasks') }}{{ "?email=desc" }}">Email</a></th>
+                    <th scope="col">Username
+                        <a href="{{ path('admin', {}, {'username':'desc'}) }}">d</a>
+                        <a href="{{ path('admin', {}, {'username':'asc'}) }}">a</a>
+                    </th>
+                    <th scope="col">Email
+                        <a href="{{ path('admin', {}, {'email':'desc'}) }}">d</a>
+                        <a href="{{ path('admin', {}, {'email':'asc'}) }}">a</a>
+                    </th>
                     <th scope="col">Text</th>
-                    <th scope="col"><a href="{{ path('tasks') }}{{ "?is_done=desc" }}">Status</a></th>
+                    <th scope="col">Status
+                        <a href="{{ path('admin', {}, {'is_done':'desc'})  }}">d</a>
+                        <a href="{{ path('admin', {}, {'is_done':'asc'})  }}">a</a>
+                    </th>
                     <th scope="col"><a href="{{ path('tasks') }}">Actions</a></th>
                 </tr>
                 </thead>
@@ -37,6 +46,22 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+            {% if items.hasPages() %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% if items.onFirstPage() %}
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="{{ path('admin', {}, {"page":items.currentPage - 1}) }}">Previous</a></li>
+                        {% endif %}
+
+                        {% if items.hasMorePages() %}
+                            <li class="page-item"><a class="page-link" href="{{ path('admin', {}, {"page":items.currentPage + 1}) }}">Next</a></li>
+                        {% else %}
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
