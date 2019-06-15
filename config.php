@@ -2,10 +2,10 @@
 
 return [
     "db" =>[
-        "host" => '127.0.0.1',
-        "database" => 'task',
-        "username" => 'root',
-        "password" => '',
+        "host" => 'mysql.zzz.com.ua',
+        "database" => 'gt720',
+        "username" => 'tasks123',
+        "password" => 'kh%50Vp5',
     ],
     "admin"=>[
         "name" => 'admin',
